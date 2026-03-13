@@ -1,48 +1,43 @@
+from flask import Flask, render_template, request
 import numpy as np
-import pandas as pd
-from pydantic import BaseModel
-from fastapi import FastAPI
 import joblib
 
-# Create FastAPI app
-app = FastAPI()
+app = Flask(__name__)
 
-# Load trained model
+# load trained model
 model = joblib.load("diabetes_prediction_model.pkl")
 
-# Input data schema
-class InputData(BaseModel):
-    Pregnancies: int
-    Glucose: int
-    BloodPressure: int
-    SkinThickness: int
-    Insulin: int
-    BMI: float
-    DiabetesPedigreeFunction: float
-    Age: int
 
-
-# Home route
-@app.get("/")
+@app.route("/")
 def home():
-    return {"message": "ML model API running successfully"}
+    return render_template("index.html")
 
 
-# Prediction route
-@app.post("/predict")
-def predict(data: InputData):
+@app.route("/predict", methods=["POST"])
+def predict():
 
-    input_data = [[
-        data.Pregnancies,
-        data.Glucose,
-        data.BloodPressure,
-        data.SkinThickness,
-        data.Insulin,
-        data.BMI,
-        data.DiabetesPedigreeFunction,
-        data.Age
-    ]]
+    Pregnancies = int(request.form["Pregnancies"])
+    Glucose = float(request.form["Glucose"])
+    BloodPressure = int(request.form["BloodPressure"])
+    SkinThickness = float(request.form["SkinThickness"])
+    Insulin = float(request.form["Insulin"])
+    BMI = float(request.form["BMI"])
+    DiabetesPedigreeFunction = float(request.form["DiabetesPedigreeFunction"])
+    Age = int(request.form["Age"])
 
-    prediction = model.predict(input_data)
+    # convert input into numpy array
+    data = np.array([[Pregnancies, Glucose, BloodPressure, SkinThickness,
+                      Insulin, BMI, DiabetesPedigreeFunction, Age]])
 
-    return {"Prediction": int(prediction[0])}
+    prediction = model.predict(data)
+
+    if prediction[0] == 1:
+        result = "Person has Diabetes"
+    else:
+        result = "Person does not have Diabetes"
+
+    return render_template("index.html", prediction_text=result)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
