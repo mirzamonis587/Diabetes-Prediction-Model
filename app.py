@@ -1,18 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import numpy as np
 import joblib
 import os
 
 app = Flask(__name__)
+app.secret_key = "secret123"   # session ke liye required
 
-# load trained model
 model = joblib.load("diabetes_prediction_model.pkl")
 
 
 @app.route("/")
 def home():
-    prediction = request.args.get('prediction')
-    return render_template("index.html",prediction_text =prediction)
+    prediction = session.pop("prediction", None)   # reload par automatically clear
+    return render_template("index.html", prediction_text=prediction)
 
 
 @app.route("/predict", methods=["POST"])
@@ -27,7 +27,6 @@ def predict():
     DiabetesPedigreeFunction = float(request.form["DiabetesPedigreeFunction"])
     Age = int(request.form["Age"])
 
-    # convert input into numpy array
     data = np.array([[Pregnancies, Glucose, BloodPressure, SkinThickness,
                       Insulin, BMI, DiabetesPedigreeFunction, Age]])
 
@@ -38,26 +37,11 @@ def predict():
     else:
         result = "Person does not have Diabetes"
 
-    return redirect(url_for("home", prediction=result))
+    session["prediction"] = result
 
-
-
-
-    # if prediction[0] == 1:
-    #     result = "Person has Diabetes"
-    # elif prediction[0] ==0:
-    #     result = "Person does not have Diabetes"
-    # else:
-    #     result =" "
-
-    # return render_template("index.html", prediction_text=result)
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
-   
-
-
-    
-
+    app.run(host="0.0.0.0", port=port, debug=True)
