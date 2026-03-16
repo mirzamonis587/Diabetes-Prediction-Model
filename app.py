@@ -32,10 +32,22 @@ def predict():
 
     prediction = model.predict(data)
 
+    # if prediction[0] == 1:
+    #     result = "Person has Diabetes"
+    # else:
+    #     result = "Person does not have Diabetes"
+
+    # return render_template("index.html", prediction_text=result)
+
+
+
+
     if prediction[0] == 1:
         result = "Person has Diabetes"
-    else:
+    elif prediction[0] ==0:
         result = "Person does not have Diabetes"
+    else:
+        result =" "
 
     return render_template("index.html", prediction_text=result)
 
