@@ -59,10 +59,25 @@
             <input class="btn mb-3" type="submit" value="Predict">
         </form>
 
-        {% if prediction_text %}
-        <h2>Prediction: {{ prediction_text }}</h2>
-        {% endif %}
+        <div id="prediction">
+{% if prediction_text %}
+<h2>Prediction: {{ prediction_text }}</h2>
+{% endif %}
+</div>
+
+
     </div>
+</body>
+
+
+<script>
+window.onload = function () {
+    if (performance.navigation.type === 1) {
+        document.getElementById("prediction").innerHTML = "";
+    }
+};
+</script>
+</html>
 
 
 
