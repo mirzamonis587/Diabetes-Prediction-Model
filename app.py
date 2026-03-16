@@ -11,7 +11,7 @@ model = joblib.load("diabetes_prediction_model.pkl")
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html",prediction_text =None)
 
 
 @app.route("/predict", methods=["POST"])
