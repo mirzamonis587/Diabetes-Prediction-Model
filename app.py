@@ -6,7 +6,13 @@ app = Flask(__name__)
 app.secret_key = "secret123"
 
 # load model
-model = joblib.load("diabetes_prediction_model.pkl")
+model = None
+
+def load_model():
+    global model
+    if model is None:
+        model = joblib.load("diabetes_prediction_model.pkl")
+    return model
 
 
 @app.route("/")
