@@ -11,59 +11,61 @@
 </head>
 
 <body>
-    
-
-<div class="container">
-    
-    <form action="/predict" method="post" class="form mt-5">
-       <div class="headings">
-        <h1>Diabetes Prediction Model</h1>
-    <h2>Enter Patient Data</h2>
-       </div>
-        <div class="col g-3 form-box">
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">Pregnancies:</label>
-                <input type="number" name="Pregnancies" required placeholder=" ">
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">Glucose:</label>
-                <input type="number" name="Glucose" required >
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">BloodPressure:</label>
-                <input type="number" name="BloodPressure" required placeholder=" ">
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">SkinThickness:</label>
-                <input type="number" name="SkinThickness" required placeholder=" ">
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">Insulin:</label>
-                <input type="number" name="Insulin" required placeholder=" ">
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">BMI:</label>
-                <input type="number" name="BMI" required placeholder=" ">
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">DiabetesPedigreeFunction:</label>
-                <input type="number" name="DiabetesPedigreeFunction" required placeholder=" ">
-            </div>
-            <div class="row form-items">
-                <label for="formGroupExampleInput" class="form-label">Age:</label>
-                <input type="number" name="Age" required placeholder=" ">
-            </div>
 
 
-        </div>
-        <input class="btn mb-3" type="submit" value="Predict">
-    </form>
+    <div class="container">
 
-    <h2>Prediction: {{ prediction_text }}</h2>
+        <form action="/predict" method="post" class="form mt-5">
+            <div class="headings">
+                <h1>Diabetes Prediction Model</h1>
+                <h2>Enter Patient Data</h2>
+            </div>
+            <div class="col g-3 form-box">
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">Pregnancies:</label>
+                    <input type="number" name="Pregnancies" required placeholder=" ">
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">Glucose:</label>
+                    <input type="number" name="Glucose" required>
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">BloodPressure:</label>
+                    <input type="number" name="BloodPressure" required placeholder=" ">
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">SkinThickness:</label>
+                    <input type="number" name="SkinThickness" required placeholder=" ">
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">Insulin:</label>
+                    <input type="number" name="Insulin" required placeholder=" ">
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">BMI:</label>
+                    <input type="number" name="BMI" required placeholder=" ">
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">DiabetesPedigreeFunction:</label>
+                    <input type="number" name="DiabetesPedigreeFunction" required placeholder=" ">
+                </div>
+                <div class="row form-items">
+                    <label for="formGroupExampleInput" class="form-label">Age:</label>
+                    <input type="number" name="Age" required placeholder=" ">
+                </div>
+
+
+            </div>
+            <input class="btn mb-3" type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+        <h2>Prediction: {{ prediction_text }}</h2>
+        {% endif %}
     </div>
 
 
-    
+
 
 
 
