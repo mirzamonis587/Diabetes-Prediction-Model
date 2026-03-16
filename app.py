@@ -34,10 +34,9 @@ def predict():
 
     if prediction[0] == 1:
         result = "Person has Diabetes"
-    elif prediction[0] == 0:
-        result = "Person does not have Diabetes"
     else:
-        return render_template("index.html",prediction_text = ' ')
+        result = "Person does not have Diabetes"
+
     return render_template("index.html", prediction_text=result)
 
 
