@@ -1,81 +1,97 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<title>Diabetes Prediction</title>
+    <title>Diabetes Prediction</title>
+
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1000px;
+        }
+    </style>
+
 </head>
 
 <body>
 
-<div class="container mt-5">
+    <div class="container mt-5">
 
-<h1 class="text-center mb-4">Diabetes Prediction Model</h1>
+        <h1 class="text-center mb-4">Diabetes Prediction Model</h1>
 
-<form action="/predict" method="post">
+        <form action="/predict" method="POST">
 
-<div class="row g-3">
+            <div class="row g-3">
 
-<div class="col-md-6">
-<label>Pregnancies</label>
-<input type="number" class="form-control" name="Pregnancies" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Pregnancies</label>
+                    <input type="number" class="form-control" name="Pregnancies" required>
+                </div>
 
-<div class="col-md-6">
-<label>Glucose</label>
-<input type="number" class="form-control" name="Glucose" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Glucose</label>
+                    <input type="number" class="form-control" name="Glucose" required>
+                </div>
 
-<div class="col-md-6">
-<label>BloodPressure</label>
-<input type="number" class="form-control" name="BloodPressure" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Blood Pressure</label>
+                    <input type="number" class="form-control" name="BloodPressure" required>
+                </div>
 
-<div class="col-md-6">
-<label>SkinThickness</label>
-<input type="number" class="form-control" name="SkinThickness" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Skin Thickness</label>
+                    <input type="number" class="form-control" name="SkinThickness" required>
+                </div>
 
-<div class="col-md-6">
-<label>Insulin</label>
-<input type="number" class="form-control" name="Insulin" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Insulin</label>
+                    <input type="number" class="form-control" name="Insulin" required>
+                </div>
 
-<div class="col-md-6">
-<label>BMI</label>
-<input type="number" step="any" class="form-control" name="BMI" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">BMI</label>
+                    <input type="number" step="any" class="form-control" name="BMI" required>
+                </div>
 
-<div class="col-md-6">
-<label>Diabetes Pedigree Function</label>
-<input type="number" step="any" class="form-control" name="DiabetesPedigreeFunction" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Diabetes Pedigree Function</label>
+                    <input type="number" step="any" class="form-control" name="DiabetesPedigreeFunction" required>
+                </div>
 
-<div class="col-md-6">
-<label>Age</label>
-<input type="number" class="form-control" name="Age" required>
-</div>
+                <div class="col-md-6">
+                    <label class="form-label">Age</label>
+                    <input type="number" class="form-control" name="Age" required>
+                </div>
 
-</div>
+            </div>
 
-<button class="btn btn-primary mt-4 w-100">Predict</button>
+            <button type="submit" class="btn btn-primary mt-4 w-100">
+                Predict
+            </button>
 
-</form>
+        </form>
 
-{% if prediction_text %}
+    </div>
 
-<div class="alert alert-info text-center mt-4">
-<h4>{{ prediction_text }}</h4>
-</div>
 
-{% endif %}
+    {% if prediction_text %}
 
-</div>
+    <script>
+        alert("{{ prediction_text }}");
+    </script>
+
+    {% endif %}
+
+
 
 </body>
+
 </html>

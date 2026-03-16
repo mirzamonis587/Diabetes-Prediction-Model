@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import numpy as np
 import joblib
 
 app = Flask(__name__)
+app.secret_key = "secret123"   # session ke liye required
 
-# lazy load model (render par fast start hota hai)
 model = None
 
 def load_model():
@@ -16,7 +16,11 @@ def load_model():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    result = session.pop("result", None)  
+    # pop ka matlab: ek baar show hoga fir delete ho jayega
+
+    return render_template("index.html", prediction_text=result)
 
 
 @app.route("/predict", methods=["POST"])
@@ -42,11 +46,16 @@ def predict():
         else:
             result = "Person does not have Diabetes"
 
-        return render_template("index.html", prediction_text=result)
+        session["result"] = result
+
+        return redirect(url_for("home"))
 
     except Exception as e:
-        return render_template("index.html", prediction_text=f"Error: {str(e)}")
+        session["result"] = f"Error: {str(e)}"
+        return redirect(url_for("home"))
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
+
