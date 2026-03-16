@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request
 import numpy as np
 import joblib
 
 app = Flask(__name__)
-app.secret_key = "secret123"
 
-# load model
+# lazy load model (render par fast start hota hai)
 model = None
 
 def load_model():
@@ -17,8 +16,7 @@ def load_model():
 
 @app.route("/")
 def home():
-    prediction = session.pop("prediction", None)
-    return render_template("index.html", prediction_text=prediction)
+    return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
@@ -36,6 +34,7 @@ def predict():
         data = np.array([[Pregnancies, Glucose, BloodPressure, SkinThickness,
                           Insulin, BMI, DiabetesPedigreeFunction, Age]])
 
+        model = load_model()
         prediction = model.predict(data)
 
         if prediction[0] == 1:
@@ -43,13 +42,11 @@ def predict():
         else:
             result = "Person does not have Diabetes"
 
-        session["prediction"] = result
+        return render_template("index.html", prediction_text=result)
 
     except Exception as e:
-        session["prediction"] = f"Error: {str(e)}"
-
-    return redirect(url_for("home"))
+        return render_template("index.html", prediction_text=f"Error: {str(e)}")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

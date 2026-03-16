@@ -1,123 +1,81 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Diabetes Prediction</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<title>Diabetes Prediction</title>
 </head>
 
 <body>
 
+<div class="container mt-5">
 
-    <div class="container">
+<h1 class="text-center mb-4">Diabetes Prediction Model</h1>
 
-        <form action="/predict" method="post" class="form mt-5">
-            <div class="headings">
-                <h1>Diabetes Prediction Model</h1>
-                <h2>Enter Patient Data</h2>
-            </div>
-            <div class="col g-3 form-box">
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">Pregnancies:</label>
-                    <input type="number" name="Pregnancies" required placeholder=" ">
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">Glucose:</label>
-                    <input type="number" name="Glucose" required>
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">BloodPressure:</label>
-                    <input type="number" name="BloodPressure" required placeholder=" ">
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">SkinThickness:</label>
-                    <input type="number" name="SkinThickness" required placeholder=" ">
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">Insulin:</label>
-                    <input type="number" name="Insulin" required placeholder=" ">
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">BMI:</label>
-                    <input type="number" name="BMI" required placeholder=" ">
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">DiabetesPedigreeFunction:</label>
-                    <input type="number" name="DiabetesPedigreeFunction" required placeholder=" ">
-                </div>
-                <div class="row form-items">
-                    <label for="formGroupExampleInput" class="form-label">Age:</label>
-                    <input type="number" name="Age" required placeholder=" ">
-                </div>
+<form action="/predict" method="post">
 
+<div class="row g-3">
 
-            </div>
-            <input class="btn mb-3" type="submit" value="Predict">
-        </form>
+<div class="col-md-6">
+<label>Pregnancies</label>
+<input type="number" class="form-control" name="Pregnancies" required>
+</div>
 
-        <div id="prediction">
-            {% if prediction_text %}
-            <h2>Prediction: {{ prediction_text }}</h2>
-            {% endif %}
-        </div>
+<div class="col-md-6">
+<label>Glucose</label>
+<input type="number" class="form-control" name="Glucose" required>
+</div>
 
+<div class="col-md-6">
+<label>BloodPressure</label>
+<input type="number" class="form-control" name="BloodPressure" required>
+</div>
 
-    </div>
+<div class="col-md-6">
+<label>SkinThickness</label>
+<input type="number" class="form-control" name="SkinThickness" required>
+</div>
 
+<div class="col-md-6">
+<label>Insulin</label>
+<input type="number" class="form-control" name="Insulin" required>
+</div>
 
+<div class="col-md-6">
+<label>BMI</label>
+<input type="number" step="any" class="form-control" name="BMI" required>
+</div>
 
+<div class="col-md-6">
+<label>Diabetes Pedigree Function</label>
+<input type="number" step="any" class="form-control" name="DiabetesPedigreeFunction" required>
+</div>
 
+<div class="col-md-6">
+<label>Age</label>
+<input type="number" class="form-control" name="Age" required>
+</div>
 
+</div>
 
-<script>
-if (window.location.search.includes("prediction")) {
-    window.history.replaceState({}, document.title, "/");
-}
-</script>
+<button class="btn btn-primary mt-4 w-100">Predict</button>
+
+</form>
+
+{% if prediction_text %}
+
+<div class="alert alert-info text-center mt-4">
+<h4>{{ prediction_text }}</h4>
+</div>
+
+{% endif %}
+
+</div>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Pregnancies: <input type="number" name="Pregnancies" required><br><br>
-
-    Glucose: <input type="number" name="Glucose" required><br><br>
-
-    BloodPressure: <input type="number" name="BloodPressure" required><br><br>
-
-    SkinThickness: <input type="number" name="SkinThickness" required><br><br>
-
-    Insulin: <input type="number" name="Insulin" required><br><br>
-
-    BMI: <input type="number" step="any" name="BMI" required><br><br>
-
-    DiabetesPedigreeFunction: <input type="number" step="any" name="DiabetesPedigreeFunction" required><br><br>
-
-    Age: <input type="number" name="Age" required><br><br> -->
-
-
-
-<!-- </form>
-
-
-
-</body>
-
-</html> -->
