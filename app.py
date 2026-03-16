@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
 import joblib
 import os
@@ -38,7 +38,7 @@ def predict():
     else:
         result = "Person does not have Diabetes"
 
-    return render_template("index.html", prediction=result)
+    return redirect(url_for("home", prediction=result))
 
 
 

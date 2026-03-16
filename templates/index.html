@@ -60,23 +60,16 @@
         </form>
 
         <div id="prediction">
-{% if prediction_text %}
-<h2>Prediction: {{ prediction_text }}</h2>
-{% endif %}
-</div>
+            {% if prediction_text %}
+            <h2>Prediction: {{ prediction_text }}</h2>
+            {% endif %}
+        </div>
 
 
     </div>
 </body>
 
 
-<script>
-window.onload = function () {
-    if (performance.navigation.type === 1) {
-        document.getElementById("prediction").innerHTML = "";
-    }
-};
-</script>
 </html>
 
 
@@ -93,7 +86,7 @@ window.onload = function () {
 
 
 
-    <!-- Pregnancies: <input type="number" name="Pregnancies" required><br><br>
+<!-- Pregnancies: <input type="number" name="Pregnancies" required><br><br>
 
     Glucose: <input type="number" name="Glucose" required><br><br>
 
@@ -111,7 +104,7 @@ window.onload = function () {
 
 
 
-    <!-- </form>
+<!-- </form>
 
 
 
