@@ -11,7 +11,8 @@ model = joblib.load("diabetes_prediction_model.pkl")
 
 @app.route("/")
 def home():
-    return render_template("index.html",prediction_text =None)
+    prediction = request.args.get('prediction')
+    return render_template("index.html",prediction_text =prediction)
 
 
 @app.route("/predict", methods=["POST"])
@@ -37,7 +38,7 @@ def predict():
     else:
         result = "Person does not have Diabetes"
 
-    return render_template("index.html", prediction_text=result)
+    return render_template("index.html", prediction=result)
 
 
 
